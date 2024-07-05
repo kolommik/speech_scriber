@@ -46,19 +46,19 @@ nvidia-smi
 #### Для CUDA 11.7
 
 ```sh
-poetry run pip install torch==2.3.1+cu117 torchvision==0.18.1+cu117 -f https://download.pytorch.org/whl/torch_stable.html
+poetry run pip install torch==2.3.1+cu117 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 #### Для CUDA 11.8
 
 ```sh
-poetry run pip install torch==2.3.1+cu118 torchvision==0.18.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
+poetry run pip install torch==2.3.1+cu118 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 #### Для CUDA 12.1
 
 ```sh
-poetry run pip install torch==2.3.1+cu121 torchvision==0.18.1+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+poetry run pip install torch==2.3.1+cu121 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 #### Для других версий CUDA или ROCm
