@@ -35,7 +35,7 @@ def process_diarization(audio_path):
     diarization_segments = []
     for turn, _, speaker in diarization.itertracks(yield_label=True):
         diarization_segments.append(
-            {"start": turn.start, "end": turn.end, "role": speaker}
+            {"start": turn.start, "end": turn.end, "speaker": speaker}
         )
 
     # Преобразование в DataFrame
