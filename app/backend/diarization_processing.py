@@ -3,6 +3,7 @@ from dotenv import load_dotenv, find_dotenv
 from pyannote.audio import Pipeline
 import pandas as pd
 import torch
+from logging_config import logger
 
 
 def process_diarization(audio_path):
@@ -19,12 +20,16 @@ def process_diarization(audio_path):
     pipeline = Pipeline.from_pretrained(
         "pyannote/speaker-diarization-3.1", use_auth_token=AUTH_TOKEN
     )
+    logger.info("Pipeline for speaker diarization initialized.")
 
     # send pipeline to GPU (when available)
-    pipeline.to(torch.device("cuda" if torch.cuda.is_available() else "cpu"))
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    pipeline.to(device)
+    logger.info(f"Pipeline for speaker diarization initialized and moved to {device}")
 
     # Применение диаризации к аудиофайлу
     diarization = pipeline(audio_path)
+    logger.info(f"Diarization applied to audio file: {audio_path}")
 
     # Обработка результатов диаризации
     diarization_segments = []
@@ -35,4 +40,5 @@ def process_diarization(audio_path):
 
     # Преобразование в DataFrame
     diarization_df = pd.DataFrame(diarization_segments)
+    logger.info("Diarization results processed and converted to DataFrame.")
     return diarization_df
