@@ -1,4 +1,5 @@
 import os
+import time
 from dotenv import load_dotenv, find_dotenv
 from pyannote.audio import Pipeline
 import pandas as pd
@@ -7,6 +8,9 @@ from logging_config import logger
 
 
 def process_diarization(audio_path):
+    start_time = time.time()
+    logger.info("Начало обработки через Pyannote.")
+
     # Ваш токен доступа Hugging Face
     load_dotenv(find_dotenv())
     AUTH_TOKEN = os.getenv("HUGGINGFACE_AUTH_TOKEN")
@@ -41,4 +45,10 @@ def process_diarization(audio_path):
     # Преобразование в DataFrame
     diarization_df = pd.DataFrame(diarization_segments)
     logger.info("Diarization results processed and converted to DataFrame.")
-    return diarization_df
+
+    end_time = time.time()
+    processing_time = end_time - start_time
+    logger.info(f"Diarization processing time: {processing_time:.2f} seconds")
+    logger.info("Обработка через Pyannote завершена.")
+
+    return diarization_df, processing_time
