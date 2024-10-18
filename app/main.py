@@ -123,9 +123,8 @@ if uploaded_file is not None:
                 elapsed_time = time.time() - start_time
 
                 # TODO: учесть более точное время обработки
-                # 0.27*audio_duration - в среднем считается за 30% от времени диалога с CUDA и whisper-turbo
-                # конечно, на моем железе
-                progress = min(elapsed_time / (0.27 * audio_duration), 1.0)
+                processing_ratio = 0.13
+                progress = min(elapsed_time / (processing_ratio * audio_duration), 1.0)
 
                 if progress > 0:
                     estimated_total_time = elapsed_time / progress
